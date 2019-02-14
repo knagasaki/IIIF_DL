@@ -11,13 +11,14 @@ arImageUrls = []
 for seq in data['sequences']:
      for canvas in seq['canvases']:
          for image in canvas['images']:
-             arImageUrls.append(image['resource']['@id'])
+             arImageUrls.append(image['resource']['service']['@id'])
 
 tLen = len(str(len(arImageUrls))) + 1
 fileNumber = 1
 print ('downloading...')
 for imageUrl in arImageUrls:
-    localFilename = str(fileNumber).zfill(tLen)+'.jpg'    
+    localFilename = str(fileNumber).zfill(tLen)+'.jpg'
+    imageUrl = imageUrl+'/full/full/0/default.jpg'
     urllib.request.urlretrieve(imageUrl, localFilename)
     fileNumber = fileNumber + 1
     print (localFilename)
